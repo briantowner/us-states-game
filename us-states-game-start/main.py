@@ -25,16 +25,13 @@ while game_is_on:
         correct_states += 1
         answer_list.append(answer_state)
     elif answer_state == "Exit":
-        break
+        #list comprehension for states to learn list
+        missing_states = [answer for answer in state_list if answer not in answer_list]
+        new_df = pandas.DataFrame(missing_states)
+        new_df.to_csv('states_to_learn.csv')
     elif correct_states == 50:
         game_is_on = False
         print(answer_list)
-
-# states_to_learn.csv
-for answer in answer_list:
-    state_list.remove(answer)
-state_frame = pandas.DataFrame(state_list)
-state_frame.to_csv('states_to_learn.csv')
 
 turtle.mainloop()
 
